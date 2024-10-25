@@ -1,13 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { HolaMundo } from './src/Components/Screens/HolaMundo';
-import React from 'react';
-import { Feed } from './src/Components/Screens/Feed';
+import React from 'react'
+import { FeedProvider } from './src/Context/FeedContext'
+import { Layout } from './src/Components/Layout/Layout'
 
-export default function App() {
+const App = () => {
   return (
-  <Feed/>
-    
-  );
+  <FeedProvider>
+
+    <Layout/>
+  </FeedProvider>
+  )
 }
+
+export default App;
 

@@ -1,10 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useFeed } from '../../Context/FeedContext';
 
 export const HolaMundo = () => {
+
+const{feed, changeFeed}=useFeed();
+
   return (
     <View style={styles.section}>
+      <TouchableOpacity onPress={()=>changeFeed(1)}>
       <Text style={styles.text}>Hola Mundo</Text>
+
+      </TouchableOpacity>
+
     </View>
   );
 }

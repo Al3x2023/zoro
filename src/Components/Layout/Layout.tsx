@@ -1,9 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useFeed } from '../../Context/FeedContext';
 
-export const Layout = () => {
-  return (
-    <div>
-      <h1>Layout</h1>
-    </div>
-  )
-}
+import { Feed } from '../Screens/Feed';
+import { HolaMundo } from '../Screens/HolaMundo';
+import Dashboard from '../Screens/Dashboard';
+import Venta from '../Screens/Venta';
+export const Layout: React.FC = () => {
+    const { feed } = useFeed(); 
+
+ 
+    switch (feed) {
+        case 0:
+            return <HolaMundo />;
+        case 1:
+            return <Feed/>;
+        case 2:
+            return <Dashboard />;
+         case 3:
+             return <Venta/>;
+        // case 5:
+        //     return <Location />;
+        // case 6:
+        //     return <Contact />;
+        // case 7:
+        //     return <Students />;
+        // case 8: 
+        //     return null;
+        // case 10:
+        //     return <Store />;
+        // case 11:
+        //     return <Help />;
+        default:
+            return <section>Página Web No Disponible</section>;
+    }
+};

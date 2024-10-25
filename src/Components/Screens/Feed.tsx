@@ -7,8 +7,13 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import { useFeed } from '../../Context/FeedContext';
 
 export const Feed = () => {
+
+const {feed, changeFeed}=useFeed()
+
+
   return (
     
     <SafeAreaView style={styles.container}>
@@ -25,11 +30,11 @@ export const Feed = () => {
         <TextInput style={styles.input} placeholder="Ingresa tu contraseña" secureTextEntry />
       </View>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={()=>changeFeed(2)}>
         <Text style={styles.buttonText}>Ingresar</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[styles.button, styles.registerButton]}>
+      <TouchableOpacity onPress={()=>changeFeed(0)} style={[styles.button, styles.registerButton]}>
         <Text style={styles.buttonText}>Registrar</Text>
       </TouchableOpacity>
 

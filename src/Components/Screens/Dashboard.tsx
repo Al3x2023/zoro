@@ -1,38 +1,31 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useFeed } from '../../Context/FeedContext';
 const Dashboard = () => {
+  const {feed, changeFeed}=useFeed()
   return (
     <View style={styles.container}>
-      {/* Cuatro botones en dos filas */}
+      {/* Encabezado */}
+      <View style={styles.header}>
+        <Text style={styles.headerText}>ZORO</Text>
+      </View>
+
+      {/* Botones verticales */}
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Realizar venta.</Text>
+        <TouchableOpacity style={styles.button} onPress={()=>changeFeed(3)}>
+          <Text style={styles.buttonText}>VENTAS</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Inventario.</Text>
+          <Text style={styles.buttonText}>VENTAS</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Realizar venta.</Text>
+          <Text style={styles.buttonText}>VENTAS</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Realizar venta.</Text>
+          <Text style={styles.buttonText}>VENTAS</Text>
         </TouchableOpacity>
-      </View>
-
-      {/* Gráfico o cuadro simulado */}
-      <View style={styles.chartContainer}>
-        <Image
-          source={{ uri: 'https://via.placeholder.com/150' }} // Reemplaza con tu gráfico real
-          style={styles.chartImage}
-        />
-      </View>
-
-      {/* Iconos en la parte inferior */}
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.iconButton}>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton}>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>VENTAS</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -44,54 +37,40 @@ export default Dashboard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ff7171', // Color de fondo rosa
+    backgroundColor: '#fff0f0', // Fondo claro rosado
     alignItems: 'center',
-    justifyContent: 'space-between', // Distribuir los elementos
-    paddingVertical: 40,
+    paddingVertical: 50,
+  },
+  header: {
+    backgroundColor: '#ff4d4d', // Fondo rojo
+    width: '100%',
+    paddingVertical: 10,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  headerText: {
+    fontSize: 48,
+    fontWeight: 'bold',
+    color: '#e60000',
+    textShadowColor: '#000',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
   },
   buttonsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap', // Para que los botones pasen a la siguiente línea
-    justifyContent: 'center',
-    gap: 10, // Espaciado entre los botones
+    width: '90%',
+    alignItems: 'center',
   },
   button: {
-    backgroundColor: '#d3d3d3', // Color gris claro
-    padding: 20,
-    margin: 10,
-    width: 120, // Ancho de los botones
-    height: 80, // Altura de los botones
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: '#d3d3d3', // Gris claro
+    width: '100%',
+    paddingVertical: 20,
+    marginVertical: 10,
     borderRadius: 10,
+    alignItems: 'center',
   },
   buttonText: {
+    fontSize: 20,
+    fontWeight: 'bold',
     color: '#000',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  chartContainer: {
-    width: 200,
-    height: 150,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  chartImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'contain',
-  },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
-    paddingVertical: 20,
-  },
-  iconButton: {
-    padding: 10,
-    backgroundColor: '#ff4d4d', // Un color rojo más oscuro para los iconos
-    borderRadius: 30,
   },
 });
