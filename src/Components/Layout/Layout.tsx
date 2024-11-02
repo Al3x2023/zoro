@@ -3,8 +3,10 @@ import { useFeed } from '../../Context/FeedContext';
 
 import { Feed } from '../Screens/Feed';
 import { HolaMundo } from '../Screens/HolaMundo';
-import Dashboard from '../Screens/Dashboard';
-import Venta from '../Screens/Venta';
+import Dashboard from '../Screens/Main';
+import { Sale } from '../Screens/Sale';
+import { Sales } from '../Screens/Sales';
+// import {Sale} from '../Screens/Sale';
 export const Layout: React.FC = () => {
     const { feed } = useFeed(); 
 
@@ -17,7 +19,7 @@ export const Layout: React.FC = () => {
         case 2:
             return <Dashboard />;
          case 3:
-             return <Venta/>;
+             return <Sale/>;
         // case 5:
         //     return <Location />;
         // case 6:
