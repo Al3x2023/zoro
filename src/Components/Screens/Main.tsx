@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useFeed } from '../../Context/FeedContext';
-const Dashboard = () => {
+
+
+export const Main = () => {
   const {feed, changeFeed}=useFeed()
   return (
     <View style={styles.container}>
@@ -15,8 +17,8 @@ const Dashboard = () => {
         <TouchableOpacity style={styles.button} onPress={()=>changeFeed(3)}>
           <Text style={styles.buttonText}>VENTAS</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>VENTAS</Text>
+        <TouchableOpacity style={styles.button} onPress={()=>changeFeed(4)}>
+          <Text style={styles.buttonText}>Dashboard</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>VENTAS</Text>
@@ -32,7 +34,6 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
 
 const styles = StyleSheet.create({
   container: {

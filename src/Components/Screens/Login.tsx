@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { useFeed } from '../../Context/FeedContext';
 
-export const Feed = () => {
+export const Login = () => {
 
 const {feed, changeFeed}=useFeed()
 
