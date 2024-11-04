@@ -20,7 +20,7 @@ export const Dashboard = () => {
     Alert.alert('Orden generada', `Se ha generado una orden de reabastecimiento para ${productName}`);
   };
 
-  const {feed, changeFeed}=useFeed();
+  const { feed, changeFeed } = useFeed();
   const renderProduct = ({ item }: { item: Product }) => {
     const isLowStock = item.stock < item.reorderLevel;
 
@@ -46,11 +46,11 @@ export const Dashboard = () => {
       />
 
 
-<TouchableOpacity  onPress={()=>changeFeed(2)}>
+      <TouchableOpacity onPress={() => changeFeed(2)}>
         <Text>Back</Text>
-        </TouchableOpacity>
+      </TouchableOpacity>
     </View>
-    
+
   );
 };
 

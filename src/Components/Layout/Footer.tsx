@@ -1,5 +1,5 @@
 import React from 'react';
-import {styles} from'../../style/styles';
+import {styles} from'../../Styles/Styles';
 import {
   SafeAreaView,
   Text,

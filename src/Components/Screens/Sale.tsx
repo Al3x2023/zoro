@@ -1,15 +1,26 @@
-import { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
-import { BarCodeScanner } from "expo-barcode-scanner";
+import { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import { useFeed } from '../../Context/FeedContext';
+import { styles } from '../../Styles/Styles';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import { Tabs } from '../Layout/Tabs';
+
+interface BarcodeData {
+  type: string;
+  data: string;
+}
 
 export const Sale = () => {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [scanned, setScanned] = useState(false);
+  const [barcodeList, setBarcodeList] = useState<BarcodeData[]>([]);
+  const { feed, changeFeed } = useFeed();
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === "granted");
+      setHasPermission(status === 'granted');
     };
 
     getBarCodeScannerPermissions();
@@ -23,58 +34,46 @@ export const Sale = () => {
     data: string;
   }) => {
     setScanned(true);
-    alert(
-      `Código de barras con tipo ${type} y datos ${data} ha sido escaneado!`
-    );
+    alert(`Código de barras con tipo ${type} y datos ${data} ha sido escaneado!`);
+    setBarcodeList((prevList) => [...prevList, { type, data }]);
   };
 
   if (hasPermission === null) {
-    return <Text>Solicitando permiso para usar la cámara</Text>;
+    return <View style={styles.container}><Text style={styles.buttontext}>Solicitando permiso para usar la cámara</Text></View>;
   }
   if (hasPermission === false) {
-    return <Text>Sin acceso a la cámara</Text>;
+    return <View style={styles.container}><Text style={styles.buttontext}>Sin acceso a la cámara</Text></View>;
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Ventas</Text>
-      <View style={styles.scannerContainer}>
-        <BarCodeScanner
+      <View>
+        <BarCodeScanner style={styles.scanner}
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={styles.scanner}
         />
       </View>
       {scanned && (
-        <Button title={"Escanear de nuevo"} onPress={() => setScanned(false)} />
+        <TouchableOpacity style={styles.buttonwhite} onPress={() => setScanned(false)}>
+          <Text style={styles.buttontextred}>Nuevo Producto</Text>
+        </TouchableOpacity>
       )}
+      <Text style={styles.buttontext}>Ticket</Text>
+      <FlatList
+        data={barcodeList}
+        keyExtractor={(_, index) => index.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.ticketItem}>
+            <Text style={styles.ticketText}>Tipo: {item.type}</Text>
+            <Text style={styles.ticketText}>Código: {item.data}</Text>
+          </View>
+        )}
+      />
+      {/* <TouchableOpacity onPress={() => changeFeed(2)}>
+        <FontAwesome6 name="circle-arrow-left" size={24} color="white" />
+      </TouchableOpacity> */}
+      
+      <Tabs />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: "#f4f4f8",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  scannerContainer: {
-    width: 350,
-    height: 150,
-    overflow: "hidden",
-    borderRadius: 8,
-    borderColor: "#db1313",
-    borderWidth: 2,
-    textAlign:'center'
-  },
-  scanner: {
-    alignSelf:'center',
-    width: 350,
-    height: 150,
-  },
-});

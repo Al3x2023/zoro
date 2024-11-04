@@ -9,9 +9,12 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@expo/vector-icons": "^14.0.3",
+    "@expo/vector-icons": "^14.0.4",
     "@expo/webpack-config": "~19.0.1",
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
     "expo": "~51.0.28",
+    "expo-barcode-scanner": "~13.0.1",
     "expo-constants": "~16.0.2",
     "expo-linking": "~6.3.1",
     "expo-router": "~3.5.23",
@@ -26,8 +29,7 @@
     "react-native-screens": "3.31.1",
     "react-native-web": "~0.19.10",
     "react-qr-barcode-scanner": "^2.0.0",
-    "vision-camera-code-scanner": "^0.2.0",
-    "expo-barcode-scanner": "~13.0.1"
+    "vision-camera-code-scanner": "^0.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
